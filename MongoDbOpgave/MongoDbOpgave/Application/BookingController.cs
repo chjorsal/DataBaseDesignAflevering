@@ -1,24 +1,58 @@
 ﻿using MongoDbOpgave.DataAccess;
+using MongoDbOpgave.interfaces;
 using MongoDbOpgave.Model;
 
 namespace MongoDbOpgave.Application;
 
 public class BookingController
 {
+    private readonly IBookingRepository _bookingRepository;
+    private readonly IFitnessClassRepository _fitnessClassRepository;
+    private readonly IMemberRepository _memberRepository;
 
-    private readonly BookingRepository _bookingRepository;
-    private readonly FitnessClassRepository _fitnessClassRepository;
-    private readonly MemberRepository _memberRepository;
-    
-    
-
-    public Booking BookClass(string memberNo, string classId)
+    public BookingController(IMemberRepository memberRepository,
+        IFitnessClassRepository fitnessClassRepository,
+        IBookingRepository bookingRepository)
     {
-        return null;
+        _memberRepository = memberRepository;
+        _fitnessClassRepository = fitnessClassRepository;
+        _bookingRepository = bookingRepository;
     }
 
-    public List<FitnessClass> GetUpcommingClasses()
+    public Booking? BookClass(string memberNo, string classId)
     {
-        return null;
+        // findes medlemmet?
+        if (_memberRepository.GetByMemberNo(memberNo) == null)
+            return null;
+
+        // findes holdet?
+        FitnessClass? fitnessClass = _fitnessClassRepository.getByClassId(classId);
+
+        if (fitnessClass == null)
+            return null;
+
+        // er medlemmet allerede booket?
+        if (_bookingRepository.exists(memberNo, classId))
+            return null;
+
+        // er der plads?
+        if (_bookingRepository.countByClassId(classId) >= fitnessClass.Capacity)
+            return null;
+
+        Booking booking = new Booking
+        {
+            MemberNo = memberNo,
+            ClassId = classId,
+            BookedAt = DateTime.UtcNow
+        };
+
+        _bookingRepository.addToClass(booking);
+
+        return booking;
+    }
+
+    public List<FitnessClass>? GetUpcommingClasses()
+    {
+        return _fitnessClassRepository.GetUpcomingClasses(DateTime.UtcNow);
     }
 }

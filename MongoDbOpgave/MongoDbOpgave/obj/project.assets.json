@@ -242,11 +242,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chjor\\RiderProjects\\MongoDbOpgave\\MongoDbOpgave\\MongoDbOpgave.csproj",
+      "projectUniqueName": "C:\\Users\\chjor\\RiderProjects\\DataBaseDesignAflevering\\MongoDbOpgave\\MongoDbOpgave\\MongoDbOpgave.csproj",
       "projectName": "MongoDbOpgave",
-      "projectPath": "C:\\Users\\chjor\\RiderProjects\\MongoDbOpgave\\MongoDbOpgave\\MongoDbOpgave.csproj",
+      "projectPath": "C:\\Users\\chjor\\RiderProjects\\DataBaseDesignAflevering\\MongoDbOpgave\\MongoDbOpgave\\MongoDbOpgave.csproj",
       "packagesPath": "C:\\Users\\chjor\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chjor\\RiderProjects\\MongoDbOpgave\\MongoDbOpgave\\obj\\",
+      "outputPath": "C:\\Users\\chjor\\RiderProjects\\DataBaseDesignAflevering\\MongoDbOpgave\\MongoDbOpgave\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
